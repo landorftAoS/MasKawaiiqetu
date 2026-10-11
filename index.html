@@ -151,9 +151,34 @@ function animateScore(el,value){
 }
 
 function rollKawaii(){
-  const valeria=randomTenth(1,99.9);
-  const gaelMin=Math.min(100,valeria+0.1);
-  const gael=randomTenth(gaelMin,100);
+  // 20% de probabilidad de que valepro777 rompa la escala.
+  const valeBreaksScale = Math.random() < 0.20;
+
+  if (valeBreaksScale) {
+    const gael = randomTenth(1,100);
+
+    gaelScore.textContent = gael.toFixed(1) + '%';
+    valeriaScore.textContent = '∞%';
+
+    valeriaScore.classList.remove('pop');
+    gaelScore.classList.remove('pop');
+    void valeriaScore.offsetWidth;
+    void gaelScore.offsetWidth;
+    valeriaScore.classList.add('pop');
+    gaelScore.classList.add('pop');
+
+    valeriaCard.classList.add('winner');
+    gaelCard.classList.remove('winner');
+
+    result.textContent = 'valepro777 rompio la escala ♾️🎀';
+    rollBtn.textContent = 'Otra vez 🎀';
+    return;
+  }
+
+  // El otro 80% del tiempo, GaelitoUwU siempre gana por al menos 0.1%.
+  const valeria = randomTenth(1,99.9);
+  const gaelMin = Math.min(100,valeria+0.1);
+  const gael = randomTenth(gaelMin,100);
 
   animateScore(valeriaScore,valeria);
   animateScore(gaelScore,gael);
